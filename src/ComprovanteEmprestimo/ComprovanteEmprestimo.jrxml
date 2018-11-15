@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ComprovanteEmprestimo" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b2795a19-a7ea-4d7f-8923-653907d39326">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="exemplar" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select em.data_emprestimo,
+em.hora_emprestimo, 
+em.data_prevista_devolucao, 
+o.nome_usuario, 
+u.nome_completo, 
+p.titulo, 
+a.nome_autor 
+from usuario u 
+join emprestimo  em using(cpf) 
+join exemplar e using(id_exemplar) 
+join publicacao p using (id_publicacao) 
+join publicacao_autor pa using(id_publicacao)
+join autor a using (id_autor), 
+emprestimo 
+join operador o using (id_operador)
+ where e.id_exemplar = $P{exemplar}]]>
+	</queryString>
+	<field name="data_emprestimo" class="java.util.Date"/>
+	<field name="hora_emprestimo" class="java.sql.Time"/>
+	<field name="data_prevista_devolucao" class="java.util.Date"/>
+	<field name="nome_usuario" class="java.lang.String"/>
+	<field name="nome_completo" class="java.lang.String"/>
+	<field name="titulo" class="java.lang.String"/>
+	<field name="nome_autor" class="java.lang.String"/>
+	<group name="data_emprestimo">
+		<groupExpression><![CDATA[$F{data_emprestimo}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="122" splitType="Stretch">
+			<staticText>
+				<reportElement x="192" y="32" width="193" height="20" uuid="3fed276a-85dc-4a64-a695-ec458b0d7808"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Universidade Estadual do Piauí]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="206" y="12" width="163" height="20" uuid="8418c3ea-5215-4c38-bc60-3554dbdca0dd"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Governo do Estado do Piauí]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="197" y="59" width="181" height="20" uuid="7438abf9-9c48-4adf-93f8-235a6783ba50"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[CAD - Automação de Bibliotecas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="183" y="87" width="216" height="20" uuid="243c1320-5c0c-416d-95e0-e3601561f975"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Comprovante de Empréstimo]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="189" splitType="Stretch">
+			<staticText>
+				<reportElement x="2" y="1" width="100" height="20" uuid="f4b17b97-a9b1-4790-bbc8-81f9b5be47ef"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Usuário]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="117" width="71" height="20" uuid="c5cd0e6c-6bf7-45e5-9497-a7a3c6163499"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Autor]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="154" y="69" width="53" height="20" uuid="eed11cd2-b155-4b4f-8e1b-6f9b51e9c68b"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{data_prevista_devolucao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="97" width="71" height="20" uuid="f87bd294-31cb-4d6a-89ba-5814e9e88615"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Material]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="57" y="1" width="275" height="20" uuid="bf1f3d2f-be8a-4d82-bb45-53a97a3891f3"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nome_completo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="149" width="71" height="20" uuid="f39b3aa8-26ba-4577-b23c-c6ae4d43b223"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Operador]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="69" width="152" height="20" uuid="b2a71bc8-3615-402a-9517-eb9bdb4367af"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Data Prevista para Devolução]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="72" y="149" width="158" height="20" uuid="6aad133f-5a8e-407b-bfbf-54b1f8821a23"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nome_usuario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="72" y="97" width="289" height="20" uuid="399ddbba-7e67-4b88-aa1b-f177e9c43cc0"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{titulo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="29" width="110" height="20" uuid="f330f5b1-5e52-42dc-b473-487cecbc18a2"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Data do Empréstimo]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="73" y="117" width="254" height="20" uuid="8f08c109-5892-4435-8568-56e52a08e3c4"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nome_autor}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH.mm.ss">
+				<reportElement x="112" y="49" width="101" height="20" uuid="d9bb1c4c-9cea-40ae-840f-447ffe2f1409"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="49" width="110" height="20" uuid="33d80a09-8839-4841-9770-8775986e4188"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Hora do Empréstimo]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yy">
+				<reportElement x="112" y="29" width="100" height="20" uuid="f3ef9b46-7cec-4636-9240-3fc412be2304"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="10"/>
+	</detail>
+	<columnFooter>
+		<band height="50"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="50"/>
+	</pageFooter>
+	<summary>
+		<band height="50"/>
+	</summary>
+</jasperReport>

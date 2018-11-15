@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ComprovanteDevolucao" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e400d6af-3fbd-4b45-a63a-fcedda9a982c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="exemplar" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select u.nome_completo, d.data_devolucao,  em.data_prevista_devolucao, p.titulo, a.nome_autor, o.nome_usuario 
+from usuario u 
+inner join emprestimo em using(cpf)
+inner join devolucao d using(id_emprestimo) 
+inner join operador o using (id_operador),
+emprestimo 
+inner join exemplar e using(id_exemplar) 
+inner join publicacao p using (id_publicacao) 
+inner join publicacao_autor pa using(id_publicacao)
+inner join autor a using(id_autor)
+ where e.id_exemplar = $P{exemplar};]]>
+	</queryString>
+	<field name="nome_completo" class="java.lang.String"/>
+	<field name="data_devolucao" class="java.sql.Timestamp"/>
+	<field name="data_prevista_devolucao" class="java.sql.Timestamp"/>
+	<field name="titulo" class="java.lang.String"/>
+	<field name="nome_autor" class="java.lang.String"/>
+	<field name="nome_usuario" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="126" splitType="Stretch">
+			<staticText>
+				<reportElement x="207" y="66" width="181" height="20" uuid="b4eb7014-afff-4e73-ab3c-1416797d88dc"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[CAD - Automação de Bibliotecas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="198" y="40" width="193" height="20" uuid="a8cef112-ce39-4e5e-a567-773eb6d42acd"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Universidade Estadual do Piauí]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="212" y="20" width="163" height="20" uuid="864c3537-3fbf-431d-851b-cc12d05f4e59"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Governo do Estado do Piauí]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="93" width="216" height="20" uuid="e7632a9c-c110-4927-849b-d234edebb3e5"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Comprovante de Devolução]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="153" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="72" width="70" height="20" uuid="d2ce511b-e06a-41f1-9966-268da6883185"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Material]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="26" width="110" height="20" uuid="8ee973d9-3c6d-47b0-8acb-11a020e0e6f1"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Data da Devolução]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="92" width="69" height="20" uuid="3e65ffd4-fe5a-4c88-a0b1-24f0a1bab319"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Autor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="97c0af45-c70c-4cb6-9f96-b3995f9e12e3"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Usuário]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="119" width="71" height="20" uuid="533a37a2-1496-4383-950c-a1d1f24255b2"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Operador]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="52" y="0" width="291" height="20" uuid="d1779da0-8a2f-454f-9276-13822fa89850"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nome_completo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="72" width="235" height="20" uuid="6a2c81d6-7dd3-475d-bbc7-d9a568737260"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{titulo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="92" width="205" height="20" uuid="a8235128-b36d-4ef1-9280-942b325cc7d2"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nome_autor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="119" width="184" height="20" uuid="24f7f523-4c19-4d57-a596-82670f65cb2a"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nome_usuario}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH.mm.ss">
+				<reportElement x="110" y="46" width="102" height="20" uuid="58c9acb1-4173-4b14-be2f-e251401f00d8"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="46" width="110" height="20" uuid="ff6df6b9-3a31-4688-9e69-e18a4b4b0f71"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Hora da Devolução]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="110" y="26" width="102" height="20" uuid="5b5e48a8-b847-4e32-a35c-5f070b12283c"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="12" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
